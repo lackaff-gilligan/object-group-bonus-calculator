@@ -1,3 +1,4 @@
+
 var atticus = { name: "Atticus", employeeNumber: "2405", annualSalary: "47000", reviewRating: 3 };
 var jem = { name: "Jem", employeeNumber: "62347", annualSalary: "63500", reviewRating: 4 };
 var boo = { name: "Boo", employeeNumber: "11435", annualSalary: "54000", reviewRating: 3 };
@@ -30,7 +31,6 @@ var Mockingbird = function(employeeIn) {
     }
     // time bonus
     var timeBonus = 0;
-    console.log(this.employeeNumber);
     if(this.employeeNumber.length <= 4) {
       timeBonus = 0.05;
     }
@@ -48,13 +48,25 @@ var Mockingbird = function(employeeIn) {
       bonusPercentage = 0;
     }
     return bonusPercentage;
-  }
-
-
+  };
   this.totalBonus = Math.round(parseInt(this.annualSalary) * this.bonusPercentage());
   this.totalCompensation = this.totalBonus + parseInt(this.annualSalary);
 };
 
-var mockingbird1 = new Mockingbird(boo);
-console.log(mockingbird1);
-console.log(employees);
+var newArray = [];
+
+function upgradeEmployees(arrayOfEmployees) {
+
+  for(var i = 0; i < arrayOfEmployees.length; i++) {
+    var oldEmployee = arrayOfEmployees[i];
+    var newEmployee = new Mockingbird(oldEmployee);
+    delete newEmployee.employeeNumber;
+    delete newEmployee.annualSalary;
+    delete newEmployee.reviewRating;
+    newArray.push(newEmployee);
+  }
+  return newArray;
+}
+
+console.log('calling the function',upgradeEmployees(employees));
+console.log('newArray after function is called',newArray);
